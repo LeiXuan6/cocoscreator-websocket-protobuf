@@ -38,15 +38,15 @@ cc.Class({
      onLoad () {
         var self = this;
 
-        var ipPort = "ws://127.0.0.1:8843/websocket";
+        var ipPort = "ws://192.168.0.103:9100/websocket";
         console.log(ipPort);
         this.ws = new WebSocket(ipPort);
         this.ws.binaryType = 'arraybuffer'; //这里设置为发送二进制数据
 
         this.ws.onopen = function (event) {
             console.log("open");
-            var protoId = new Long(1003);
-            const loginMessage =["jacklei",123456];
+            var protoId = new Long(1000);
+            const loginMessage =[11111,"leixuan","zzzz","100"]; 
             //打开成功立刻进行发送
             if (self.ws.readyState === WebSocket.OPEN) {
                
@@ -56,9 +56,9 @@ cc.Class({
 
                 let dataView = new DataView(requestBody);
                 //魔数
-                let magic = parseInt("0xa8",16);
+                let magic = parseInt("0xbabe",16);
                 let status = parseInt("0x20",16);
-                let sign = 97;//这个值是固定表示
+                let sign = 81;//这个值是固定表示
                 dataView.setInt16(0,magic);
                 dataView.setInt8(2,sign);
                 dataView.setInt8(3,status);
